@@ -1,0 +1,26 @@
+name: Steven's first workflow
+on: [push]
+
+jobs:
+  run-shell-commands:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print out Steven rocks
+        run: echo "Steven's a wealthy figure in the US"
+      - name: Multiline Command
+        run: |
+            node -v
+            npm -v
+  parallel-job-macos:
+    runs-on: macos-latest
+    steps: 
+      - name: View SW version
+        run: sw_vers
+  dependant-job:
+    runs-on: windows-latest
+    needs: run-shell-commands
+    steps:
+      - name: echo a string
+        run: Write-Output "Windows String should be skipped" 
+      - name: Error Step
+        run: doesnotexitss
